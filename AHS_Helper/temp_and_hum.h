@@ -2,7 +2,9 @@
 #define _temp_and_hum_h_
 
 #include <inttypes.h>
-#include "DHT.h"
+#include <Adafruit_Sensor.h>
+#include <DHT.h>
+#include <DHT_U.h>
 #include <OneWire.h>
 #include "DallasTemperature.h"
 
@@ -16,13 +18,13 @@ void insertionSort(double* data, uint8_t sz);
 //INPUT: DHT object 
 //OUTPUT: ambiental temperature (double)
 
-double getTemp(DHT obj, uint8_t nMeasurements);	
+double getTemp(DHT_Unified& obj, uint8_t nMeasurements, uint32_t& delayTime);	
 
 
 //INPUT: DHT obj, uint8_t nMeasurementsect 
 //OUTPUT: relative humidity (double)
 
-double getHum(DHT obj, uint8_t nMeasurements); 
+double getHum(DHT_Unified& obj, uint8_t nMeasurements, uint32_t& delayTime); 
 
 //INPUT: DallasTemperature obj, uint8_t nMeasurementsect
 //OUTPUT: measured temperature (double) 
