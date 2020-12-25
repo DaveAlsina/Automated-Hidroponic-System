@@ -25,6 +25,7 @@ void insertionSort(double* data, uint8_t sz){
 		}
 			data[count] = key;									//posiciona la llave en su lugar correcto
 	}
+
 }
 
 
@@ -32,13 +33,17 @@ void insertionSort(double* data, uint8_t sz){
 //INPUT: objeto de clase DHT, 'nMeasurements' numero de mediciones a tomar antes de encontrar la mediana
 //OUTPUT: temperatura 
 
-double getTemp(DHT obj, uint8_t nMeasurements){
+double getTemp(DHT_Unified& obj, uint8_t nMeasurements, uint32_t& delayTime){
 
 	double measurements[nMeasurements];							//array para guardar las mediciones tomadas
+	// Get temperature event and print its value.
+	sensors_event_t event;
 
 	for(uint8_t i = 0; i < nMeasurements; i++){					//toma de mediciones
-		measurements[i] = obj.readTemperature();
-		delay(200);
+
+		obj.temperature().getEvent(&event);
+		measurements[i] = event.temperature;                                                  
+		delay(delayTime);                                                                                         
 	}
 
 	insertionSort(measurements, nMeasurements);					//ordenado del array
@@ -59,13 +64,18 @@ double getTemp(DHT obj, uint8_t nMeasurements){
 //INPUT: objeto de la clase DHT, 'nMeasurements' numero de mediciones a tomar antes de encontrar la mediana 
 //OUTPUT: humedad
 
-double getHum(DHT obj, uint8_t nMeasurements){
+double getHum(DHT_Unified& obj, uint8_t nMeasurements, uint32_t& delayTime){
 
 	double measurements[nMeasurements];							//array para guardar las mediciones tomadas
-                                                                                                            
+	// Get temperature event and print its value.
+	sensors_event_t event;
+
+	                                                                                                 
 	for(uint8_t i = 0; i<nMeasurements; i++){                   //toma de mediciones
-		measurements[i] = obj.readHumidity();                                                               
-		delay(200);                                                                                         
+
+		obj.humidity().getEvent(&event);
+		measurements[i] = event.relative_humidity;                                                  
+		delay(delayTime);                                                                                         
 	}                                                                                                       
                                                                                                             
 	insertionSort(measurements, nMeasurements);                 //ordenado del array
