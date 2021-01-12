@@ -97,7 +97,7 @@ double getHum(DHT_Unified& obj, uint8_t nMeasurements, uint32_t& delayTime){
 //OUTPUT: temperatura 
 
 //recuerde que el 'DeviceAddress' es un alias para: 'uint8_t DeviceAddress [8]'
-double getTemp(DallasTemperature obj, const uint8_t* addr, uint8_t nMeasurements){		 
+double getTemp(DallasTemperature obj, const byte* addr, uint8_t nMeasurements){		 
 																
 	double measurements[nMeasurements];							//array para guardar las mediciones tomadas
                                                                                                             
