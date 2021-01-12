@@ -1,11 +1,11 @@
 #ifndef _ec_meter_h_
 #define _ec_meter_h_
 
-#include <utility>
 #include "Arduino.h"						//another cool library that can be used https://roboticsbackend.com/arduino-stl-library/
 #include "temp_and_hum.h" 
 
 using namespace std;
+
 
 class EcMeter{
 
@@ -59,13 +59,12 @@ class EcMeter{
 
 		void begin();						//sets up the sensor 
 
-		//OUTPUT: pair.first = EC measurement | pair.second = ppm measurement 
-		pair<double, double> getEC();		//takes the measurement the minimum waiting time between readings is 
-											//5 seconds
+		//OUTPUT: EC measurement
+		double getEC();								//takes the measurement the minimum waiting time between readings is 
+													//4 seconds
 
 		bool chgConvertFact(String conv);
 };
-
 
 
 #endif

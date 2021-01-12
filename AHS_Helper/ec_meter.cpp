@@ -28,7 +28,7 @@ EcMeter::EcMeter(float VoltageInput, int r1, int ra, int ecPin, int ecPower, int
 	PPMconversion = AUS_ppmConversion;		//sets the default conversion factor
 }
 
-pair<double, double> EcMeter::getEC(){
+double EcMeter::getEC(){
 	
 	//*********Reading temp Of Solution *******************//
 	const double temp = getTemp(tempProbe, probeAddr, 3);	
@@ -50,9 +50,9 @@ pair<double, double> EcMeter::getEC(){
 	//*************Compensating For Temperaure********************//
 
 	const double EC25  =  EC/ (1+ TemperatureCoef*(temp - 25.0));
-	const double ppm = (EC25)*(PPMconversion*1000);
+	//const double ppm = (EC25)*(PPMconversion*1000);
 
-	pair<double, double> ans(EC25, ppm);
+	double ans = EC25;
 	return ans;
 }
 
