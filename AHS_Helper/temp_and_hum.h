@@ -29,7 +29,7 @@ double getHum(DHT_Unified& obj, uint8_t nMeasurements, uint32_t& delayTime);
 //INPUT: DallasTemperature obj, uint8_t nMeasurementsect
 //OUTPUT: measured temperature (double) 
 
-double getTemp(DallasTemperature obj, const uint8_t* addr, uint8_t nMeasurements);
+double getTemp(DallasTemperature obj, const byte* addr, uint8_t nMeasurements);
 
 
 #endif
