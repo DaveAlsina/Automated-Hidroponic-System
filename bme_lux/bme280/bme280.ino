@@ -35,7 +35,7 @@ void setup(){
 
 
     // default settings
-    bool status = bme.begin();  
+    bool status = bme.begin(0x76);  
     // You can also pass in a Wire library object like &Wire2
     // status = bme.begin(0x76, &Wire2)
 
