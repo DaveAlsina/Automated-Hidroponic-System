@@ -1,4 +1,5 @@
 #define BLYNK_PRINT Serial
+#include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 
 #include <Wire.h>
@@ -11,13 +12,13 @@
 // You should get Auth Token in the Blynk App.
 // Go to the Project Settings (nut icon).
 
-char auth[] = "YourAuthToken";
+char auth[] = "_uUTfyn9qF0OmhfzE3oRJJwKg2V0HplV";
 
 // Your WiFi credentials.
 // Set password to "" for open networks.
 
-char ssid[] = "YourNetworkName";
-char pass[] = "YourPassword";
+char ssid[] = "SomosRUB";
+char pass[] = "claro2015";
 
 Adafruit_BME280 bme; //I2C
 BlynkTimer timer;
