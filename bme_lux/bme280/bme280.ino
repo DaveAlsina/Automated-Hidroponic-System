@@ -1,5 +1,4 @@
 #define BLYNK_PRINT Serial
-#include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 
 #include <Wire.h>
@@ -35,7 +34,7 @@ void setup(){
 
 
     // default settings
-    status = bme.begin();  
+    bool status = bme.begin();  
     // You can also pass in a Wire library object like &Wire2
     // status = bme.begin(0x76, &Wire2)
 
@@ -55,10 +54,8 @@ void setup(){
 
 
 void loop(){
-
-
-
-
+  Blynk.run();
+  timer.run();
 }
 
 
@@ -66,12 +63,11 @@ void loop(){
 
 void sendData(){
 
-	double pressure = bme.getPressure_MB();
-	double hum = bme.getHumidity();
-	double temp = bme.getTemperature_C();
+	double pressure = bme.readPressure() / 100.0F; //hPa
+	double hum = bme.readHumidity();
+	double temp = bme.readTemperature();
 
 	Blynk.virtualWrite(V1, pressure);
 	Blynk.virtualWrite(V2, hum);
 	Blynk.virtualWrite(V3, temp);
 }
-
