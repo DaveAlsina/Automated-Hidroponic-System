@@ -12,13 +12,13 @@
 // You should get Auth Token in the Blynk App.
 // Go to the Project Settings (nut icon).
 
-char auth[] = "_uUTfyn9qF0OmhfzE3oRJJwKg2V0HplV";
+char auth[] = "";
 
 // Your WiFi credentials.
 // Set password to "" for open networks.
 
-char ssid[] = "SomosRUB";
-char pass[] = "claro2015";
+char ssid[] = "";
+char pass[] = "";
 
 Adafruit_BME280 bme; //I2C
 BlynkTimer timer;
