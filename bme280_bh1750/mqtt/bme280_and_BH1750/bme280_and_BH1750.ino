@@ -6,7 +6,7 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
 
-#include "/**/**/**/**/**/**/network_secrets.h"
+#include "/home/david/Desktop/AHS/bme280_bh1750/mqtt/network_secrets.h"
 
 #define seaLevelPressure_Hpa (1013.25);
 
@@ -18,14 +18,14 @@
 WiFiClient wifiClient;
 MqttClient mqttClient(wifiClient);
 
-const char broker[] = "127.0.0.1";
+const char broker[] = "";
 const int port = 1883;
 
 
 // Your WiFi credentials.
 // Set password to "" for open networks.
 
-String topics[5] = {"Esp#8266!D4ta/pressure/", "Esp#8266!D4ta/temp/", "Esp#8266!D4ta/hum/", "Esp#8266!D4ta/lux/"};
+String topics[5] = {"Esp8266!D4ta/pressure/", "Esp8266!D4ta/temp/", "Esp8266!D4ta/hum/", "Esp8266!D4ta/lux/"};
 String deviceId = "10370001";
 
 char ssid[] = SECRET_SSID; 
@@ -63,11 +63,18 @@ void setup() {
 	Serial.println("You're connected to the network");
 	Serial.println();
 	
-	mqttClient.setUsernamePassword("username", "password");
+	mqttClient.setUsernamePassword("ccctest1", "ccctest1_nuncasupecomoseescribe");
 
-	 // set a will message, used by the broker when the connection dies unexpectantly
-	// you must know the size of the message before hand, and it must be set before connecting
-	String willPayload =  "connection from device:";
+
+  if (!mqttClient.connect(broker, port)) {
+    Serial.print("MQTT connection failed! Error code = ");
+    Serial.println(mqttClient.connectError());
+
+    while (1);
+  }
+
+  Serial.println("You're connected to the MQTT broker!");
+  Serial.println();
 
 
 	if (lightMeter.begin(BH1750::CONTINUOUS_HIGH_RES_MODE_2)) {
@@ -94,8 +101,9 @@ void setup() {
 }
 
 void loop() {
+  mqttClient.poll();
   sendata();
-  delay(10*1000);
+  delay(55*1000);
 }
 
 
@@ -109,7 +117,7 @@ void sendata() {
 	//creación de las payload con los datos a ser enviado a cada tema
 	String payloads[5] = { "", "", "", "" };
 
-	for(int i = 0; i < 5; i++)
+	for(int i = 0; i < 4; i++)
 		payloads[i] += measurement[i];
 	
 	//seteo de las variables para envío del mensaje via protocolo mqtt
@@ -117,7 +125,7 @@ void sendata() {
 	int qos = 2; 
 	bool dup = false;
 	
-	for(int i = 0; i < 5; i++){
+	for(int i = 0; i < 4; i++){
 		mqttClient.beginMessage( topics[i]+deviceId, payloads[i].length(), retained, qos, dup);
 		mqttClient.print(payloads[i]);
 		mqttClient.endMessage();
