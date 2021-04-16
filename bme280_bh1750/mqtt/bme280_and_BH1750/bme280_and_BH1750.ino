@@ -6,7 +6,7 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
 
-#include "/home/david/Desktop/AHS/bme280_bh1750/mqtt/network_secrets.h"
+#include "/**/**/**/**/bme280_bh1750/mqtt/network_secrets.h"
 
 #define seaLevelPressure_Hpa (1013.25);
 
@@ -25,8 +25,7 @@ const int port = 1883;
 // Your WiFi credentials.
 // Set password to "" for open networks.
 
-String topics[5] = {"Esp8266!D4ta/pressure/", "Esp8266!D4ta/temp/", "Esp8266!D4ta/hum/", "Esp8266!D4ta/lux/"};
-String deviceId = "10370001";
+String topics[5] = {"Esp8266!D4ta/10370001/temp", "Esp8266!D4ta/10370001/hum","Esp8266!D4ta/10370001/pressure", "Esp8266!D4ta/10370001/lux"};
 
 char ssid[] = SECRET_SSID; 
 char pass[] = SECRET_PASS;
@@ -63,7 +62,7 @@ void setup() {
 	Serial.println("You're connected to the network");
 	Serial.println();
 	
-	mqttClient.setUsernamePassword("ccctest1", "ccctest1_nuncasupecomoseescribe");
+	mqttClient.setUsernamePassword("", "");
 
 
   if (!mqttClient.connect(broker, port)) {
@@ -103,7 +102,7 @@ void setup() {
 void loop() {
   mqttClient.poll();
   sendata();
-  delay(55*1000);
+  delay(28*1000);
 }
 
 
@@ -111,8 +110,8 @@ void loop() {
 void sendata() {
 
 
-	//mediciones: [presión en hPa, humedad, temperatura, lux]
-	double measurement[5] = {bme.readPressure()/100.0F,  bme.readTemperature(), bme.readHumidity(), lightMeter.readLightLevel()};
+	//mediciones: [temperatura, humedad, presión en hPa, lux]
+	double measurement[5] = {bme.readTemperature(), bme.readHumidity(), bme.readPressure()/100.0F, lightMeter.readLightLevel()};
 
 	//creación de las payload con los datos a ser enviado a cada tema
 	String payloads[5] = { "", "", "", "" };
@@ -126,12 +125,12 @@ void sendata() {
 	bool dup = false;
 	
 	for(int i = 0; i < 4; i++){
-		mqttClient.beginMessage( topics[i]+deviceId, payloads[i].length(), retained, qos, dup);
+		mqttClient.beginMessage(topics[i], payloads[i].length(), retained, qos, dup);
 		mqttClient.print(payloads[i]);
 		mqttClient.endMessage();
 
     Serial.println();
-    Serial.print(topics[i]+deviceId);
+    Serial.print(topics[i]);
     Serial.print("/");
     Serial.print(payloads[i]);
     Serial.println();
