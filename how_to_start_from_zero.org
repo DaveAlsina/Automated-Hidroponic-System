@@ -1,0 +1,59 @@
+#+TITLE: How To Start From Zero
+#+DESCRIPTION: Guía para empezar a trabajar en el proyecto AHS o para poder implementarlo desde cero efectivamente.
+#+AUTHOR: Dave Alsina
+
+
+* Instalar Arduino
+
+Primero hay que instalar Arduino y para ello hace falta ir a este sitio:
+[[https://www.arduino.cc/en/software][Descargar Arduino.]] Una vez descargado arduino podemos pasar a su instalación, en este caso asumiré que vamos a trabajar en linux:
+
+Se descargará algo de este estilo 'arduino*.tar.xz' (note que el *\** en el nombre se puede entender como cualquier cosa, es el shortcut de expresiones regulares que significa literalmente: cualquier cosa), hace falta entonces descomprimir el tar (y enviarlo al directorio home por comodidad):
+
+#+BEGIN_SRC bash
+tar -xf ./arduino*.tar.xz
+mv arduino* ~
+#+END_SRC
+
+desde la carpeta 'arduino*' podemos ejecutar el script de instalación con permisos de super usuario:
+
+#+BEGIN_SRC bash
+cd ~
+sudo ./arduino*/install.sh
+#+END_SRC
+
+
+
+* Instalar las dependencias
+
+Para este proyecto se hace uso de:
+
+1. Esp8266 (Micro-controlador).
+2. Bme280 (Sensor de humedad, temperatura y presión atmosférica).
+3. Bh1750 (Sensor de intensidad lumínica - lux).
+
+Por lo que necesitaremos ampliar el manejador de microcontroladores _(ya que este por defecto no incluye las boards ESP)_ y también instalar los paquetes para poder hacer uso de los sensores.
+Para el primer punto recomiendo seguir esta guía: [[http://arduino.esp8266.com/stable/package_esp8266com_index.json][guia para añadir esp8266 al board manager]]. Aunque si gustan más de los videos [[https://youtu.be/SNntIS8Uc6Y][este tipo hace un buen trabajo explicándolo.]]
+
+
+Ahora que tenemos el board manager podemos pasar a la instalación de los paquetes para manejar el BME280 y el BH1750, estos últimos no serán nada complicados. Se puede abrir el manejador de librerías al oprimir *CNTRL + SHIFT + i* (también se puede ir al gestor de librerías llendo a la opción *sketch > include library > manage libraries*) una vez allí podemos buscar bme280 e instalaremos la librería que se llama *Adafruit BME280 Library* en su versión 2.2.2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
