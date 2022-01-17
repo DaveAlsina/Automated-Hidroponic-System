@@ -22,6 +22,8 @@ cd ~
 sudo ./arduino*/install.sh
 #+END_SRC
 
+#+RESULTS:
+
 
 
 * Instalar las dependencias
@@ -35,8 +37,9 @@ Para este proyecto se hace uso de:
 Por lo que necesitaremos ampliar el manejador de microcontroladores _(ya que este por defecto no incluye las boards ESP)_ y también instalar los paquetes para poder hacer uso de los sensores.
 Para el primer punto recomiendo seguir esta guía: [[http://arduino.esp8266.com/stable/package_esp8266com_index.json][guia para añadir esp8266 al board manager]]. Aunque si gustan más de los videos [[https://youtu.be/SNntIS8Uc6Y][este tipo hace un buen trabajo explicándolo.]]
 
+Para compilar el programa que se encuentra en *Automated-Hidroponic-System/bme280_bh1750/mqtt/bme280_and_BH1750/bme280_and_BH1750.ino* hace falta que siga la guía de instalación de dependencias a continuación, este programa permite hacer una pequeña estación de medición de temperatura, humedad, presión atmosférica y lux para el monitoreo de las condiciones a las que se exponen los cultivos, dichos datos se envían a un broker mqtt del cual tendrá que añadir credenciales en el script antes de compilarlo.
 
-Ahora que tenemos el board manager podemos pasar a la instalación de los paquetes para manejar el BME280 y el BH1750, estos últimos no serán nada complicados. Se puede abrir el manejador de librerías al oprimir *CNTRL + SHIFT + i* (también se puede ir al gestor de librerías llendo a la opción *sketch > include library > manage libraries*) una vez allí podemos buscar bme280 e instalaremos la librería que se llama *Adafruit BME280 Library* en su versión 2.2.2.
+Ahora que tenemos el board manager podemos pasar a la instalación de los paquetes para manejar el BME280 y el BH1750, estos últimos no serán nada complicados. Se puede abrir el manejador de librerías al oprimir *CNTRL + SHIFT + i* (también se puede ir al gestor de librerías llendo a la opción *sketch > include library > manage libraries*) una vez allí podemos buscar bme280 e instalaremos la librería que se llama *Adafruit BME280 Library* en su versión 2.2.2 (Instale con todas sus dependencias). En el menú también consulte por la librería ArduinoMqttClient e instalela en su versión 0.1.5. Haga lo mismo con la librería BH1750 (por Christopher Laws) en su versión 1.3.0.
 
 
 
