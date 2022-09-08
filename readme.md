@@ -1,5 +1,8 @@
 # AHS (Automated Hydroponic System)
 
+
+[Este proyecto continúa bajo otro nombre y más actualizado en el repositorio DaveAlsina/maticas](https://github.com/DaveAlsina/maticas)
+
 AHS es un proyecto abierto que busca desarrollar **sistemas de cultivo hidrónicos automatizados**
 inicialmente haciendo uso de **IoT**. 
 
